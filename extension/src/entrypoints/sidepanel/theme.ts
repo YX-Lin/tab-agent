@@ -28,6 +28,9 @@ export const appTheme: ThemeConfig = {
       primaryShadow: "none",
       defaultShadow: "none",
     },
+    Checkbox: {
+      borderRadiusSM: 4,
+    },
     Modal: {
       contentBg: "#ffffff",
       headerBg: "#ffffff",

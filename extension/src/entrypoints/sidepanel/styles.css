@@ -340,38 +340,335 @@ body {
   padding: 8px 10px 12px;
 }
 
-.workspace-list .ant-list-item {
+.stage-sheet-body:has(.workspace) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.workspace {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.workspace-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.workspace-summary {
+  min-width: 0;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.workspace-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 10px;
+}
+
+.workspace-section {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.workspace-section.is-current {
+  border-color: color-mix(in srgb, var(--group-color, #155eef) 45%, rgba(15, 23, 42, 0.08));
+}
+
+.workspace-section-head {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 36px;
+  padding: 0 6px 0 4px;
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.workspace-section-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 6px 4px;
   cursor: pointer;
-  padding-inline: 6px;
+  text-align: left;
+  color: inherit;
+}
+
+.workspace-section-toggle:hover {
+  color: #121826;
+}
+
+.workspace-section-toggle .caret {
+  font-size: 10px;
+  color: #8b93a5;
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.workspace-section-toggle .caret.is-open {
+  transform: rotate(90deg);
+}
+
+.workspace-section-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--group-color, #9aa0a6);
+  flex-shrink: 0;
+}
+
+.workspace-section-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #121826;
+}
+
+.workspace-section-count {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #8b93a5;
+  background: rgba(15, 23, 42, 0.05);
+  border-radius: 999px;
+  padding: 0 6px;
+  line-height: 18px;
+}
+
+.workspace-section-pill {
+  flex-shrink: 0;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #155eef;
+  background: rgba(21, 94, 239, 0.12);
+  border-radius: 999px;
+  padding: 0 6px;
+  line-height: 18px;
+}
+
+.workspace-section-tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.workspace-section-body {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 4px 4px;
+}
+
+.workspace-section-empty {
+  padding: 12px 10px 14px;
+  font-size: 12px;
+  color: #8b93a5;
+}
+
+.workspace-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 4px 4px 4px 6px;
   border-radius: 8px;
 }
 
-.workspace-list .ant-list-item:hover {
+.workspace-tab:hover,
+.workspace-tab.is-selected {
   background: rgba(21, 94, 239, 0.06);
+}
+
+.workspace-tab.is-active {
+  background: rgba(21, 94, 239, 0.1);
+}
+
+.workspace-tab.is-restricted {
+  opacity: 0.72;
+}
+
+.workspace-tab .ant-checkbox-wrapper {
+  flex-shrink: 0;
+}
+
+.workspace-tab-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+
+.workspace-tab-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 1px;
+}
+
+.workspace-tab-title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #121826;
+}
+
+.workspace-tab-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-tab-lock {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #8b93a5;
+}
+
+.workspace-tab-url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #8b93a5;
+}
+
+.workspace-tab-rename {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #8b93a5;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.workspace-tab:hover .workspace-tab-rename,
+.workspace-tab:focus-within .workspace-tab-rename,
+.workspace-tab-rename:focus-visible {
+  opacity: 1;
+}
+
+.workspace-tab-main:focus-visible,
+.workspace-section-toggle:focus-visible,
+.workspace-tab-rename:focus-visible {
+  outline: 2px solid #155eef;
+  outline-offset: 1px;
+}
+
+.workspace-tab-rename:hover {
+  color: #155eef;
+  background: rgba(21, 94, 239, 0.1);
+}
+
+.workspace-dock {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
+  margin: 0 -10px;
+  padding: 8px 10px 10px;
+  background: #f4f6fa;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.workspace-dock-count {
+  margin-right: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: #121826;
 }
 
 .tta-chip {
   margin-inline-end: 0 !important;
   border: 0 !important;
-  background: rgba(21, 94, 239, 0.1) !important;
-  color: #155eef !important;
+  background: var(--chip-bg, rgba(21, 94, 239, 0.1)) !important;
+  color: var(--chip-fg, #155eef) !important;
   font-size: 11px !important;
   border-radius: 999px !important;
+  flex-shrink: 0;
+  line-height: 18px;
+  padding: 0 6px;
 }
 
 .tab-favicon {
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.tab-favicon.is-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.08);
+  color: #5c6578;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.ant-checkbox-inner {
+  border-radius: 4px !important;
 }
 
 .ant-btn-primary {
   text-shadow: none;
 }
 
+@media (hover: none) {
+  .workspace-tab-rename {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .chat-home-setup:active,
   .chat-home-prompt:active {
     transform: none;
+  }
+
+  .workspace-section-toggle .caret {
+    transition: none;
   }
 }
