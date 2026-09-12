@@ -1,0 +1,38 @@
+html,
+body,
+#root {
+  margin: 0;
+}
+
+html,
+body {
+  width: 320px;
+  background: #ffffff;
+  overflow: visible;
+}
+
+body {
+  color: #121826;
+  font-family:
+    "Segoe UI Variable Text", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.rename-shell {
+  padding: 12px 14px 14px;
+}
+
+.rename-shell h1 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rename-shell .ant-form-item {
+  margin-bottom: 10px;
+}
+
+.rename-status {
+  padding: 24px 8px;
+  color: #5c6578;
+  font-size: 12px;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "tab-manager-agent",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter extension dev",
+    "build": "pnpm --filter extension build && pnpm --filter tab-agent build",
+    "zip": "pnpm --filter extension zip",
+    "mcp": "pnpm --filter tab-agent mcp",
+    "cli:install": "pnpm --filter tab-agent build && pnpm exec tab-agent install"
+  }
+}

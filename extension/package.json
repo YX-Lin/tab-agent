@@ -1,0 +1,30 @@
+{
+  "name": "extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.6.1",
+    "@ant-design/x": "^1.6.1",
+    "@ant-design/x-markdown": "^2.9.0",
+    "@tab-title-agent/shared": "workspace:*",
+    "antd": "^5.27.1",
+    "motion": "^13.2.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@wxt-dev/auto-icons": "^1.1.1",
+    "@wxt-dev/module-react": "^1.1.5",
+    "typescript": "^5.9.2",
+    "wxt": "^0.20.11"
+  }
+}

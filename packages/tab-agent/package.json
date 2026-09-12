@@ -1,0 +1,32 @@
+{
+  "name": "tab-agent",
+  "version": "0.1.0",
+  "description": "Tab Agent CLI：把 Chrome 扩展暴露成 MCP Server，供 Cursor 等外部 Agent 调用。",
+  "type": "module",
+  "bin": {
+    "tab-agent": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "mcp": "pnpm build && node dist/bin.js mcp",
+    "dev": "tsup --watch"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.2",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@tab-title-agent/shared": "workspace:*",
+    "@types/node": "^24.5.2",
+    "@types/ws": "^8.18.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
+  }
+}

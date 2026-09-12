@@ -1,0 +1,7 @@
+packages:
+  - extension
+  - packages/*
+
+allowBuilds:
+  esbuild: true
+  spawn-sync: false
