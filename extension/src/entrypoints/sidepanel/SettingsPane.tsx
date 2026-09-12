@@ -44,8 +44,8 @@ function mcpCursorConfig() {
   return `{
   "mcpServers": {
     "tab-agent": {
-      "command": "npx",
-      "args": ["-y", "tab-agent", "mcp"]
+      "command": "node",
+      "args": ["<仓库根目录>/packages/tab-agent/dist/bin.js", "mcp"]
     }
   }
 }`;
@@ -150,7 +150,7 @@ export function SettingsPane({ settings, onRefresh }: Props) {
         label="允许外部 Agent 经 MCP 连接"
         name="mcpEnabled"
         valuePropName="checked"
-        extra="打开后，Cursor 等可以通过 tab-agent CLI 调用同一套整理工具。"
+        extra="打开后，Cursor 可通过本仓库的 tab-agent CLI 调用同一套整理工具。扩展和 CLI 都尚未上架，请从 GitHub 克隆后使用。"
       >
         <Switch />
       </Form.Item>
@@ -169,17 +169,19 @@ export function SettingsPane({ settings, onRefresh }: Props) {
             mcpStatus?.lastError && settings.mcpEnabled
               ? mcpStatus.lastError
               : settings.mcpEnabled
-                ? "先运行 tab-agent install，再在 Cursor 里启动 tab-agent mcp。"
+                ? "在仓库根目录运行 pnpm exec tab-agent install，再按下方配置启动 Cursor MCP。"
                 : "打开开关并保存后，扩展会连接本机 Native Host。"
           }
         />
         <Typography.Text type="secondary">扩展 ID</Typography.Text>
         <Typography.Text copyable>{extensionId}</Typography.Text>
-        <Typography.Text type="secondary">本机安装（一次）</Typography.Text>
+        <Typography.Text type="secondary">本机安装（在仓库根目录执行一次）</Typography.Text>
         <Typography.Paragraph copyable code>
           {`pnpm exec tab-agent install --extension-id ${extensionId}`}
         </Typography.Paragraph>
-        <Typography.Text type="secondary">Cursor MCP 配置</Typography.Text>
+        <Typography.Text type="secondary">
+          Cursor MCP 配置（把仓库根目录换成 clone 后的绝对路径，不要用 npx tab-agent）
+        </Typography.Text>
         <Typography.Paragraph copyable>
           <pre style={{ margin: 0, whiteSpace: "pre-wrap" }}>{mcpCursorConfig()}</pre>
         </Typography.Paragraph>

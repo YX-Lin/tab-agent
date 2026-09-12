@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import {
   NATIVE_HOST_NAME,
   PINNED_EXTENSION_ID,
@@ -6,7 +7,29 @@ import {
 import { installNativeHost, statusReport, uninstallNativeHost } from "./install";
 import { runMcp } from "./mcp";
 
-const HELP = `Tab Agent CLI  —  把 Chrome 扩展暴露成 MCP Server
+function thisBinPath() {
+  return fileURLToPath(import.meta.url);
+}
+
+function cursorMcpSnippet() {
+  return JSON.stringify(
+    {
+      mcpServers: {
+        "tab-agent": {
+          command: "node",
+          args: [thisBinPath(), "mcp"],
+        },
+      },
+    },
+    null,
+    2,
+  );
+}
+
+function helpText() {
+  return `Tab Agent CLI  —  把 Chrome 扩展暴露成 MCP Server
+
+当前未发布到 npm，请从 GitHub 克隆仓库后使用。不要运行 npx tab-agent。
 
 用法:
   tab-agent mcp
@@ -15,19 +38,13 @@ const HELP = `Tab Agent CLI  —  把 Chrome 扩展暴露成 MCP Server
   tab-agent status
   tab-agent help
 
-Cursor 配置:
-  {
-    "mcpServers": {
-      "tab-agent": {
-        "command": "npx",
-        "args": ["-y", "tab-agent", "mcp"]
-      }
-    }
-  }
+Cursor 配置（本机路径）:
+${cursorMcpSnippet()}
 
 本地开发可用:
   pnpm --filter tab-agent mcp
 `;
+}
 
 function argValue(args: string[], name: string) {
   const index = args.indexOf(name);
@@ -56,9 +73,11 @@ async function main() {
         `  清单        ${state.manifest}`,
         "",
         "接下来：",
-        "  1. Chrome 加载 Tab Agent 扩展（开发版目录 extension/.output/chrome-mv3）",
-        "  2. 在侧栏设置里打开「允许外部 Agent 经 MCP 连接」",
-        "  3. 在 Cursor 里添加 MCP：npx -y tab-agent mcp",
+        "  1. Chrome 打开开发者模式，加载已解压扩展 extension/.output/chrome-mv3",
+        "  2. 在侧栏设置里打开「允许外部 Agent 经 MCP 连接」并保存",
+        "  3. 把下面这段加进 Cursor 的 MCP 配置（当前未发 npm，不要用 npx tab-agent）：",
+        "",
+        cursorMcpSnippet(),
         "",
       ].join("\n"),
     );
@@ -78,14 +97,14 @@ async function main() {
   }
 
   if (command === "help" || command === "-h" || command === "--help") {
-    process.stdout.write(HELP);
+    process.stdout.write(helpText());
     process.stdout.write(
       `默认扩展 ID: ${PINNED_EXTENSION_ID}\nNative Host: ${NATIVE_HOST_NAME}\n协议版本: v${PROTOCOL_VERSION}\n`,
     );
     return;
   }
 
-  process.stderr.write(`未知命令: ${command}\n\n${HELP}`);
+  process.stderr.write(`未知命令: ${command}\n\n${helpText()}`);
   process.exitCode = 1;
 }
 
